@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tutorial Demo</title>
+    <style>
+      body{
+        background-color:#000;
+        overflow-y: hidden;
+      }
+      #container{
+        width: 100%;
+        height: 100vh;
+        
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script src="./node_modules/@antv/g6/dist/g6.min.js"></script>
+
+    <script>
+      G6.registerEdge(
+        "line-arrow",
+        {
+          getPath(points) {
+            const startPoint = points[0];
+            const endPoint = points[1];
+            return [
+              ["M", startPoint.x, startPoint.y],
+              ["L", endPoint.x / 3 + (2 / 3) * startPoint.x, startPoint.y],
+              ["L", endPoint.x / 3 + (2 / 3) * startPoint.x, endPoint.y],
+              ["L", endPoint.x, endPoint.y],
+            ];
+          },
+          getShapeStyle(cfg) {
+            const startPoint = cfg.startPoint;
+            const endPoint = cfg.endPoint;
+            const controlPoints = this.getControlPoints(cfg);
+            let points = [startPoint]; // the start point
+            // the control points
+            if (controlPoints) {
+              points = points.concat(controlPoints);
+            }
+            // the end point
+            points.push(endPoint);
+            const path = this.getPath(points);
+            const style = Object.assign(
+              {},
+              G6.Global.defaultEdge.style,
+              {
+                stroke: "#BBB",
+                lineWidth: 1,
+                path,
+              },
+              cfg.style
+            );
+            return style;
+          },
+        },
+        "line"
+      );
+
+      const data = {
+        nodes: [
+          {
+            id: "1",
+            x: 150,
+            y: 100,
+            size: 100,
+            label: "1:GD1",
+            style: {
+              fill: "rgb(218, 113, 148)",
+              stroke: "rgb(204, 60, 108)",
+              fontSize:16
+            },
+            fontSize:20
+            // anchorPoints: [
+            //   [1, 0.5],
+            //   [1, 0],
+            // ],
+          },
+          {
+            id: "2",
+            x: 350,
+            y: 100,
+            size: 100,
+            label: "2:GD1",
+            style: {
+              fill: "rgb(218, 113, 148)",
+              stroke: "rgb(204, 60, 108)",
+            },
+            // anchorPoints: [
+            //   [0, 0.5],
+            //   [0, 2],
+
+            // ],
+          },
+          {
+            id: "3",
+            x: 550,
+            y: 100,
+            size: 100,
+            label: "3:GD1",
+            style: {
+              fill: "rgb(218, 113, 148)",
+              stroke: "rgb(204, 60, 108)",
+            },
+            // anchorPoints: [
+            //   [1, 0.5],
+            //   [1, 0],
+            // ],
+          },
+          {
+            id: "4",
+            x: 750,
+            y: 100,
+            size: 100,
+            label: "4:GD1",
+            style: {
+              fill: "rgb(218, 113, 148)",
+              stroke: "rgb(204, 60, 108)",
+            },
+            // anchorPoints: [
+            //   [0, 0.5],
+            //   [0, 2],
+
+            // ],
+          },
+          {
+            id: "5",
+            x: 950,
+            y: 100,
+            size: 100,
+            label: "5:GD1",
+            style: {
+              fill: "rgb(218, 113, 148)",
+              stroke: "rgb(204, 60, 108)",
+            },
+            // anchorPoints: [
+            //   [1, 0.5],
+            //   [1, 0],
+            // ],
+          },
+          {
+            id: "6",
+            x: 1150,
+            y: 100,
+            size: 100,
+            label: "6:GD1",
+            style: {
+              fill: "rgb(218, 113, 148)",
+              stroke: "rgb(204, 60, 108)",
+            },
+            // anchorPoints: [
+            //   [0, 0.5],
+            //   [0, 2],
+
+            // ],
+          },
+          {
+            id: "7",
+            x: 1350,
+            y: 100,
+            size: 100,
+            label: "7:GD1",
+            style: {
+              fill: "rgb(218, 113, 148)",
+              stroke: "rgb(204, 60, 108)",
+            },
+            // anchorPoints: [
+            //   [1, 0.5],
+            //   [1, 0],
+            // ],
+          },
+          {
+            id: "8",
+            x: 1550,
+            y: 100,
+            size: 100,
+            label: "8:GD1",
+            style: {
+              fill: "rgb(218, 113, 148)",
+              stroke: "rgb(204, 60, 108)",
+            },
+            // anchorPoints: [
+            //   [0, 0.5],
+            //   [0, 2],
+
+            // ],
+          },
+          {
+            id: "9",
+            x: 150,
+            y: 300,
+            size: 100,
+            label: "Vip",
+            style: {
+              fill: "#FFF",
+              stroke: "#000000",
+            },
+            // anchorPoints: [
+            //   [1, 0.5],
+            //   [1, 0],
+            // ],
+          },
+          {
+            id: "10",
+            x: 350,
+            y: 300,
+            size: 100,
+            label: "GD6:XXX",
+            style: {
+              fill: "rgb(165, 171, 182)",
+              stroke: "rgb(154, 161, 172)",
+            },
+          },
+          {
+            id: "11",
+            x: 350,
+            y: 500,
+            size: 100,
+            label: "CMDT:GD1",
+            style: {
+              fill: "rgb(165, 171, 182)",
+              stroke: "rgb(154, 161, 172)",
+            },
+          },
+          {
+            id: "12",
+            x: 550,
+            y: 500,
+            size: 100,
+            label: "EQR:XXX",
+            style: {
+              fill: "rgb(165, 171, 182)",
+              stroke: "rgb(154, 161, 172)",
+            },
+          },
+          {
+            id: "13",
+            x: 750,
+            y: 500,
+            size: 100,
+            label: "EQA:GDN",
+            style: {
+              fill: "rgb(165, 171, 182)",
+              stroke: "rgb(154, 161, 172)",
+            },
+          },
+          {
+            id: "14",
+            x: 950,
+            y: 500,
+            size: 100,
+            label: "TST:GD6",
+            style: {
+              fill: "rgb(165, 171, 182)",
+              stroke: "rgb(154, 161, 172)",
+            },
+          },
+          {
+            id: "15",
+            x: 1150,
+            y: 500,
+            size: 100,
+            label: "FQR:XXX",
+            style: {
+              fill: "rgb(165, 171, 182)",
+              stroke: "rgb(154, 161, 172)",
+            },
+          },
+          {
+            id: "16",
+            x: 1350,
+            y: 500,
+            size: 100,
+            label: "TRK:GDN",
+            style: {
+              fill: "rgb(165, 171, 182)",
+              stroke: "rgb(154, 161, 172)",
+            }, 
+          },
+          {
+            id: "17",
+            x: 1150,
+            y: 300,
+            size: 100,
+            label: "OK to Book",
+            style: {
+              fill: "#FFF",
+              stroke: "#000000",
+            },
+            anchorPoints: [
+              [0.5, 0.5],
+              [1, 0],
+            ],
+          },
+        ],
+          
+        edges: [
+          {
+            target: "2",
+            source: "1",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            target: "3",
+            source: "2",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            target: "4",
+            source: "3",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            target: "5",
+            source: "4",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            target: "6",
+            source: "5",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            target: "7",
+            source: "6",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            target: "8",
+            source: "7",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            target: "10",
+            source: "9",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            target: "11",
+            source: "10",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            source: "11",
+            target: "12",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            source: "12",
+            target: "13",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            source: "12",
+            target: "13",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            source: "13",
+            target: "14",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            source: "14",
+            target: "15",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            source: "15",
+            target: "16",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            source: "17",
+            target: "16",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+          {
+            source: "17",
+            target: "6",
+            sourceAnchor: 0,
+            targetAnchor: 0,
+            style: {
+              endArrow: true,
+            },
+          },
+
+          
+        ],
+      };
+
+      // Instantiate a Graph
+      const container = document.getElementById("container");
+      const width = container.scrollWidth;
+      const height = container.scrollHeight || 500;
+
+
+      data.edges.forEach((edge) => {
+        edge.style.stroke = "#F6BD16";
+        console.log(edge.style.endArrow);
+        //edge.style.endArrow.fill = "#F6BD16";
+      });
+
+      
+      const graph = new G6.Graph({
+        container: "container",
+        width,
+        height,
+        // translate the graph to align the canvas's center, support by v3.5.1
+        fitCenter: true,
+        modes: {
+          // behavior
+          default: ["drag-node", "drag-canvas"],
+        },
+        defaultNode: {
+          type: "circle",
+          linkPoints: {
+            left: true,
+            right: true,
+            fill: "#fff",
+            stroke: "#1890FF",
+            size: 3,
+          },
+        },
+        defaultEdge: {
+          type: "line-arrow",
+          style: {
+            stroke: "#F6BD16",
+            // endArrow: {
+            //   path: "M 0,0 L 12,6 L 9,0 L 12,-6 Z",
+            //   fill: "#F6BD16",
+            // },
+          },
+        },
+      });
+
+      // Load the data
+      graph.data(data);
+      // Render the graph
+      graph.render();
+
+      if (typeof window !== "undefined")
+        window.onresize = () => {
+          if (!graph || graph.get("destroyed")) return;
+          if (!container || !container.scrollWidth || !container.scrollHeight)
+            return;
+          graph.changeSize(container.scrollWidth, container.scrollHeight);
+        };
+    </script>
+  </body>
+</html>
